@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/homepage.dart';
+import 'package:flutter_application_1/screens/newhome.dart';
 
 class Loginpage extends StatelessWidget {
   @override
@@ -54,7 +54,7 @@ class Loginpage extends StatelessWidget {
               text: "Log In",
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => homepage()),
+                MaterialPageRoute(builder: (context) => newhome()),
               ),
             ),
             SizedBox(
