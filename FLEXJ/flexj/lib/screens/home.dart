@@ -81,18 +81,19 @@ class steps extends StatefulWidget {
 class _stepsState extends State<steps> {
   @override
   Widget build(BuildContext context) {
-    int obiettivoPassi = 8000;
-    int passiDay = 5000;
-    double counter = passiDay * 0.60;
-    double peso = 80;
-    double cal = 0.5 * peso * counter / 1000;
-    double passiPercent = passiDay / obiettivoPassi * 100;
-    if (passiPercent > 100) {
-      passiPercent = 100;
-    }
+
+    // int obiettivoPassi = 8000;
+    // int passiDay = 5000;
+    // double counter = passiDay * 0.60;
+    // double peso = 80;
+    // double cal = 0.5 * peso * counter / 1000;
+    // double passiPercent = passiDay / obiettivoPassi * 100;
+    // if (passiPercent > 100) {
+    //   passiPercent = 100;
+    // }
     
     return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.centerRight,
                 end: Alignment.centerLeft,
@@ -104,6 +105,17 @@ class _stepsState extends State<steps> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+
+
+
+
+
+
+
+
+
+
+              
               CircularStepProgressIndicator(
                 totalSteps: obiettivoPassi,
                 currentStep: passiDay,
@@ -178,7 +190,7 @@ class _dashboardState extends State<dashboard> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
