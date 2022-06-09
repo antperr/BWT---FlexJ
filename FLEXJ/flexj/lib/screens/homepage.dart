@@ -155,14 +155,16 @@ class _HomePageState extends State<HomePage> {
                     redirectUri: Strings.fitbitRedirectUri,
                     callbackUrlScheme: Strings.fitbitCallbackScheme);
 
+
+
               FitbitHeartDataManager fitbitHeartDataManager = FitbitHeartDataManager(
                       clientID: Strings.fitbitClientID,
                       clientSecret: Strings.fitbitClientSecret,
                                        );
 
-              FitbitHeartAPIURL fitbitHeartApiUrl = FitbitHeartAPIURL.dayWithUserID(
+             FitbitHeartAPIURL fitbitHeartApiUrl = FitbitHeartAPIURL.dayWithUserID(
                                     date: DateTime.now(),
-                                    userID: userId,
+                                    userID: Strings.fitbitClientID,
                                   );
 
               FitbitActivityTimeseriesDataManager
@@ -177,18 +179,19 @@ class _HomePageState extends State<HomePage> {
 
 
                 //Fetch data
-                final floors = await fitbitActivityTimeseriesDataManager.fetch(FitbitActivityTimeseriesAPIURL.dayWithResource(
-                  date: DateTime.now().subtract(Duration(days: 2)),
-                  userID: userId,
-                  resource: fitbitActivityTimeseriesDataManager.type,
-                )) as List<FitbitActivityTimeseriesData>;
+                // final floors = await fitbitActivityTimeseriesDataManager.fetch(FitbitActivityTimeseriesAPIURL.dayWithResource(
+                //   date: DateTime.now().subtract(Duration(days: 2)),
+                //   userID: userId,
+                //   resource: fitbitActivityTimeseriesDataManager.type,
+                // )) as List<FitbitActivityTimeseriesData>;
 
 
-               List<FitbitHeartData> fitbitHeartData = await fitbitHeartDataManager.fetch(FitbitActivityTimeseriesAPIURL.dayWithResource(
-                  date: DateTime.now().subtract(Duration(days: 2)),
-                  userID: userId,
-                  resource: fitbitActivityTimeseriesDataManager.type,
-                ));
+               List<FitbitHeartData> fitbitHeartData = (await fitbitHeartDataManager.fetch(fitbitHeartApiUrl)).cast<FitbitHeartData>();
+              //  await fitbitHeartDataManager.fetch(FitbitActivityTimeseriesAPIURL.dayWithResource(
+              //     date: DateTime.now().subtract(Duration(days: 2)),
+              //     userID: userId,
+              //     resource: fitbitActivityTimeseriesDataManager.type,
+              //   ));
               
               
               }, child: Text('premi e vedi il cuore')),

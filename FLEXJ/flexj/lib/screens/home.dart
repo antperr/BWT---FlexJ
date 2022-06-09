@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class newhome extends StatefulWidget {
   const newhome({Key? key}) : super(key: key);
@@ -70,9 +71,14 @@ class newhomeState extends State<newhome> {
   }
 }
 
-class steps extends StatelessWidget {
+class steps extends StatefulWidget {
   const steps({Key? key}) : super(key: key);
 
+  @override
+  State<steps> createState() => _stepsState();
+}
+
+class _stepsState extends State<steps> {
   @override
   Widget build(BuildContext context) {
     int obiettivoPassi = 8000;
@@ -84,6 +90,7 @@ class steps extends StatelessWidget {
     if (passiPercent > 100) {
       passiPercent = 100;
     }
+    
     return Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -132,9 +139,14 @@ class steps extends StatelessWidget {
   }
 }
 
-class hf extends StatelessWidget {
+class hf extends StatefulWidget {
   const hf({Key? key}) : super(key: key);
 
+  @override
+  State<hf> createState() => _hfState();
+}
+
+class _hfState extends State<hf> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -153,9 +165,14 @@ class hf extends StatelessWidget {
   }
 }
 
-class dashboard extends StatelessWidget {
+class dashboard extends StatefulWidget {
   const dashboard({Key? key}) : super(key: key);
 
+  @override
+  State<dashboard> createState() => _dashboardState();
+}
+
+class _dashboardState extends State<dashboard> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -169,21 +186,19 @@ class dashboard extends StatelessWidget {
             Colors.black,
             Colors.purple,
           ])),
-      child: ListView(
-        children: [
-          Image.network(
-            "https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png",
-            scale: 3,
-          ),
-        ],
-      ),
+      
     );
   }
 }
 
-class sleep extends StatelessWidget {
+class sleep extends StatefulWidget {
   const sleep({Key? key}) : super(key: key);
 
+  @override
+  State<sleep> createState() => _sleepState();
+}
+
+class _sleepState extends State<sleep> {
   @override
   Widget build(BuildContext context) {
     return Container(

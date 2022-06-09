@@ -1,3 +1,4 @@
+import 'package:flexj/screens/home.dart';
 import 'package:flexj/screens/homepage.dart';
 import 'package:flexj/screens/pickvalue.dart';
 import 'package:flexj/screens/profilepage.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: HomePage.route,
       //This maps names to the set of routes within the app
       routes: {
-         HomePage.route: (context) => HomePage(),
+         HomePage.route: (context) => newhome(),
         '/profile/': (context) => ProfilePage(), 
         // '/message/': (context) => MessagePage(),
         '/pickValue/': (context) => PickValuePage(),
