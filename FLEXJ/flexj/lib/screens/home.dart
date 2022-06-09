@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class newhome extends StatefulWidget {
   const newhome({Key? key}) : super(key: key);
