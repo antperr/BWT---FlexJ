@@ -1,3 +1,4 @@
+import 'package:flexj/screens/profilepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
@@ -28,18 +29,37 @@ class newhomeState extends State<newhome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(
-      //  title: const Text(
-      //  "FlexJ",
-      //style: TextStyle(
-      //color: Colors.purple,
-      //  fontSize: 25,
-      //fontWeight: FontWeight.w600,
-      //),
-      //),
-      //centerTitle: true,
-      // backgroundColor: Colors.black,
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: const Text(
+      //     'Dashboard',
+      //   ),
+      //   backgroundColor: Colors.black,
       // ),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     // Important: Remove any padding from the ListView.
+      //     padding: EdgeInsets.zero,
+      //     children: [
+      //       const DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: Colors.blue,
+      //         ),
+      //         child: Text('Drawer Header'),
+      //       ),
+      //       ListTile(
+      //         leading: Icon(
+      //           Icons.home,
+      //         ),
+      //         title: const Text('Profile'),
+      //         onTap: () {
+      //           Navigator.pop(context);
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // ),
+
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -81,17 +101,16 @@ class steps extends StatefulWidget {
 class _stepsState extends State<steps> {
   @override
   Widget build(BuildContext context) {
+    int obiettivoPassi = 8000;
+    int passiDay = 5000;
+    double counter = passiDay * 0.60;
+    double peso = 80;
+    double cal = 0.5 * peso * counter / 1000;
+    double passiPercent = passiDay / obiettivoPassi * 100;
+    if (passiPercent > 100) {
+      passiPercent = 100;
+    }
 
-    // int obiettivoPassi = 8000;
-    // int passiDay = 5000;
-    // double counter = passiDay * 0.60;
-    // double peso = 80;
-    // double cal = 0.5 * peso * counter / 1000;
-    // double passiPercent = passiDay / obiettivoPassi * 100;
-    // if (passiPercent > 100) {
-    //   passiPercent = 100;
-    // }
-    
     return Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -105,17 +124,6 @@ class _stepsState extends State<steps> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
-
-
-
-
-
-
-
-
-
-              
               CircularStepProgressIndicator(
                 totalSteps: obiettivoPassi,
                 currentStep: passiDay,
@@ -187,18 +195,98 @@ class dashboard extends StatefulWidget {
 class _dashboardState extends State<dashboard> {
   @override
   Widget build(BuildContext context) {
+    double peso = 85.50;
+    double altezza = 185;
+    double bodymass = peso / ((altezza / 100) * (altezza / 100));
+    String BMI = bodymass.toStringAsFixed(1);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+              begin: Alignment.centerRight,
+              end: Alignment.centerLeft,
               colors: [
             Colors.black,
             Colors.purple,
           ])),
-      
+      child: Scaffold(
+          backgroundColor: Colors.transparent,
+          drawer: Drawer(
+            child: ListView(
+              // Important: Remove any padding from the ListView.
+              padding: EdgeInsets.zero,
+              children: [
+                // const DrawerHeader(
+                //   decoration: BoxDecoration(
+                //     color: Colors.purple,
+                //   ),
+                //   child: Text('Drawer Header'),
+                // ),
+                Container(
+                  height: 100,
+                  color: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        "FLEXJ",
+                        style: TextStyle(fontSize: 40),
+                      )
+                    ],
+                  ),
+                ),
+
+                Card(
+                    shadowColor: Colors.purple,
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.account_circle,
+                      ),
+                      trailing: const Icon(Icons.arrow_right),
+                      title: const Text('Profile'),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ProfilePage()));
+                      },
+                    )),
+
+                ListTile(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Nome utente'),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [const Text('Peso:'), Text("$peso"), Text("Kg")],
+                  ),
+                ),
+                ListTile(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text('Altezza:'),
+                      Text("$altezza"),
+                      Text("cm")
+                    ],
+                  ),
+                ),
+                ListTile(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [const Text('BMI:'), Text("$BMI")],
+                  ),
+                )
+              ],
+            ),
+          )),
     );
   }
 }

@@ -27,3 +27,51 @@ class ProfilePage extends StatelessWidget {
   } //build
 
 } //ProfilePage
+
+
+drawer: Drawer(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // Important: Remove any padding from the ListView.
+              
+              children: [
+                // const DrawerHeader(
+                //   decoration: BoxDecoration(
+                //     color: Colors.purple,
+                //   ),
+                //   child: Text('Drawer Header'),
+                // ),
+                
+                      Text(
+                        "FLEXJ",
+                        style: TextStyle(fontSize: 40),
+                      )
+                    ],
+                  ),
+                ),
+ListView(child:
+                Card(
+                    shadowColor: Colors.purple,
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.account_circle,
+                      ),
+                      trailing: const Icon(Icons.arrow_right),
+                      title: const Text('Profile'),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ProfilePage()));
+                      },
+                    )),
+
+                Text("Nomeutente"),
+                Text("mail"),
+                Text("Peso"),
+                Text("altezza"),
+                Text("BMI"),
+                
+    );
+  }
+}
