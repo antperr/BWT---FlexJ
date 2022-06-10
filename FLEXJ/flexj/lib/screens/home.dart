@@ -1,6 +1,7 @@
 import 'package:flexj/screens/profilepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class newhome extends StatefulWidget {
@@ -195,7 +196,7 @@ class dashboard extends StatefulWidget {
 class _dashboardState extends State<dashboard> {
   @override
   Widget build(BuildContext context) {
-    double peso = 85.50;
+    int peso = 85;
     double altezza = 185;
     double bodymass = peso / ((altezza / 100) * (altezza / 100));
     String BMI = bodymass.toStringAsFixed(1);

@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
       initialRoute: HomePage.route,
       //This maps names to the set of routes within the app
       routes: {
-         HomePage.route: (context) => newhome(),
-        '/profile/': (context) => ProfilePage(), 
+        HomePage.route: (context) => newhome(),
+        '/profile/': (context) => ProfilePage(),
         // '/message/': (context) => MessagePage(),
         '/pickValue/': (context) => PickValuePage(),
       },
