@@ -39,7 +39,6 @@ class MyApp extends StatelessWidget {
       routes: {
         HomePage.route: (context) => newhome(),
         '/profile/': (context) => ProfilePage(),
-        // '/message/': (context) => MessagePage(),
         '/pickValue/': (context) => PickValuePage(),
       },
     );

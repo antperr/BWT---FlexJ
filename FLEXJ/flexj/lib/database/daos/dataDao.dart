@@ -5,10 +5,10 @@ import 'package:floor/floor.dart';
 abstract class DataDao {
   //Query #1: SELECT -> this allows to obtain the max value for calories and steps
   @Query('SELECT MAX(cal) FROM data')
-  Future<void> findMaxCal();
+  Future<Object?> findMaxCal();
 
   @Query('SELECT MAX(steps) FROM data')
-  Future<void> findMaxSteps();
+  Future<Object?> findMaxSteps();
 
   @insert
   Future<void> insertdata(Data data);
