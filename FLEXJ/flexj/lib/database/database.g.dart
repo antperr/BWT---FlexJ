@@ -61,6 +61,8 @@ class _$AppDatabase extends AppDatabase {
     changeListener = listener ?? StreamController<String>.broadcast();
   }
 
+  DataDao? _dataDaoInstance;
+
   UserDao? _userDaoInstance;
 
   Future<sqflite.Database> open(String path, List<Migration> migrations,
@@ -84,7 +86,7 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `User` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `email` TEXT NOT NULL, `pw` TEXT NOT NULL)');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Data` (`id` INTEGER, `giorno` INTEGER NOT NULL, `steps` INTEGER, `bpm` INTEGER, `sleep` INTEGER, `cal` INTEGER, `peso` INTEGER, `altezza` INTEGER, `bmi` INTEGER, `id` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `Data` (`id` INTEGER, `giorno` INTEGER NOT NULL, `steps` INTEGER, `bpm` INTEGER, `sleep` INTEGER, `cal` INTEGER, `obiettivo` INTEGER NOT NULL, `peso` INTEGER, `altezza` INTEGER, `bmi` INTEGER, `id` INTEGER NOT NULL, FOREIGN KEY (`id2`) REFERENCES `User` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -93,8 +95,105 @@ class _$AppDatabase extends AppDatabase {
   }
 
   @override
+  DataDao get dataDao {
+    return _dataDaoInstance ??= _$DataDao(database, changeListener);
+  }
+
+  @override
   UserDao get userDao {
     return _userDaoInstance ??= _$UserDao(database, changeListener);
+  }
+}
+
+class _$DataDao extends DataDao {
+  _$DataDao(this.database, this.changeListener)
+      : _queryAdapter = QueryAdapter(database),
+        _dataInsertionAdapter = InsertionAdapter(
+            database,
+            'Data',
+            (Data item) => <String, Object?>{
+                  'id': item.id,
+                  'giorno': _dateTimeConverter.encode(item.giorno),
+                  'steps': item.steps,
+                  'bpm': item.bpm,
+                  'sleep': item.sleep,
+                  'cal': item.cal,
+                  'obiettivo': item.obiettivo ? 1 : 0,
+                  'peso': item.peso,
+                  'altezza': item.altezza,
+                  'bmi': item.bmi,
+                  'id': item.id2
+                }),
+        _dataUpdateAdapter = UpdateAdapter(
+            database,
+            'Data',
+            ['id'],
+            (Data item) => <String, Object?>{
+                  'id': item.id,
+                  'giorno': _dateTimeConverter.encode(item.giorno),
+                  'steps': item.steps,
+                  'bpm': item.bpm,
+                  'sleep': item.sleep,
+                  'cal': item.cal,
+                  'obiettivo': item.obiettivo ? 1 : 0,
+                  'peso': item.peso,
+                  'altezza': item.altezza,
+                  'bmi': item.bmi,
+                  'id': item.id2
+                }),
+        _dataDeletionAdapter = DeletionAdapter(
+            database,
+            'Data',
+            ['id'],
+            (Data item) => <String, Object?>{
+                  'id': item.id,
+                  'giorno': _dateTimeConverter.encode(item.giorno),
+                  'steps': item.steps,
+                  'bpm': item.bpm,
+                  'sleep': item.sleep,
+                  'cal': item.cal,
+                  'obiettivo': item.obiettivo ? 1 : 0,
+                  'peso': item.peso,
+                  'altezza': item.altezza,
+                  'bmi': item.bmi,
+                  'id': item.id2
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<Data> _dataInsertionAdapter;
+
+  final UpdateAdapter<Data> _dataUpdateAdapter;
+
+  final DeletionAdapter<Data> _dataDeletionAdapter;
+
+  @override
+  Future<void> findMaxCal() async {
+    await _queryAdapter.queryNoReturn('SELECT MAX(cal) FROM data');
+  }
+
+  @override
+  Future<void> findMaxSteps() async {
+    await _queryAdapter.queryNoReturn('SELECT MAX(steps) FROM data');
+  }
+
+  @override
+  Future<void> insertdata(Data data) async {
+    await _dataInsertionAdapter.insert(data, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> updatedata(Data data) async {
+    await _dataUpdateAdapter.update(data, OnConflictStrategy.replace);
+  }
+
+  @override
+  Future<void> deletedata(Data data) async {
+    await _dataDeletionAdapter.delete(data);
   }
 }
 
