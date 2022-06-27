@@ -1,4 +1,6 @@
+import 'package:fitbitter/fitbitter.dart';
 import 'package:flexj/screens/profilepage.dart';
+import 'package:flexj/utils/strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -171,20 +173,149 @@ class _hfState extends State<hf> {
   @override
   Widget build(BuildContext context) {
     return Container(
+
+
       color: const Color(0xffC4DFCB),
       child: Center(
-        child: Text(
-          "Page Number 3",
-          style: TextStyle(
-            color: Colors.green[900],
-            fontSize: 45,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                // Authorize the app
+              },
+              child: Text('Yesterday you walked!')),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await FitbitConnector.unauthorize(
+                    clientID: Strings.fitbitClientID,
+                    clientSecret: Strings.fitbitClientSecret,);
+              },
+              child: Text('Tap to unauthorize'),
+            ),
+          ],
       ),
+    )
     );
+    
   }
 }
+
+
+
+
+FetchedFitData Fetch(userID, ){
+   String? userId = await FitbitConnector.authorize(
+                    context: context,
+                    clientID: Strings.fitbitClientID,
+                    clientSecret: Strings.fitbitClientSecret,
+                    redirectUri: Strings.fitbitRedirectUri,
+                    callbackUrlScheme: Strings.fitbitCallbackScheme);
+                    
+                //Instantiate a proper data manager
+                FitbitActivityTimeseriesDataManager
+                    fitbitActivityTimeseriesDataManager = FitbitActivityTimeseriesDataManager(
+                                clientID: Strings.fitbitClientID,
+                                clientSecret: Strings.fitbitClientSecret,
+                                type: 'steps',
+                    );
+
+                //Fetch data
+                final stepsData = await fitbitActivityTimeseriesDataManager.fetch(
+                                          FitbitActivityTimeseriesAPIURL.dayWithResource(
+                                            date: DateTime.now().subtract(Duration(days: 1)),
+                                            userID: userId,
+                                            resource: fitbitActivityTimeseriesDataManager.type,
+                                          )
+                                        ) as List<FitbitActivityTimeseriesData>;
+
+}
+
+
+
+
+
+
+
+class FetchedFitData{
+
+  double? passi;
+  double? bpm;
+  List<FitbitActivityTimeseriesData>? hr;
+  
+  FetchedFitData();
+
+  FetchedFitData.withstep({this.passi});
+  FetchedFitData.withhr({this.bpm});
+  FetchedFitData.withtimehr({this.hr});
+
+}
+
+
+Future<FetchedFitData> fetchin() async{
+
+  FetchedFitData fitData;
+
+  
+  String? userId = await FitbitConnector.authorize(
+                    context: context,
+                    clientID: Strings.fitbitClientID,
+                    clientSecret: Strings.fitbitClientSecret,
+                    redirectUri: Strings.fitbitRedirectUri,
+                    callbackUrlScheme: Strings.fitbitCallbackScheme);
+                    
+                //Instantiate a proper data manager
+  FitbitActivityTimeseriesDataManager fitbitActivityTimeseriesDataManager = 
+                    FitbitActivityTimeseriesDataManager(
+                                clientID: Strings.fitbitClientID,
+                                clientSecret: Strings.fitbitClientSecret,
+                                type: 'steps',
+                    );
+
+                //Fetch data
+                final hrData = await fitbitActivityTimeseriesDataManager.fetch(
+                                          FitbitActivityTimeseriesAPIURL.dayWithResource(
+                                            date: DateTime.now().subtract(Duration(days: 1)),
+                                            userID: userId,
+                                            resource: fitbitActivityTimeseriesDataManager.type,
+                                          )
+                                        ) as List<FitbitActivityTimeseriesData>;
+
+
+    fitData=FetchedFitData.withstep(passi: 10);
+    fitData=FetchedFitData.withhr(bpm: 100);
+    fitData=FetchedFitData.withtimehr(hr: hrData);
+
+
+  return fitData;
+}
+
+
+
+
+
+
+
+
+Future Data getdata
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class dashboard extends StatefulWidget {
   const dashboard({Key? key}) : super(key: key);
@@ -297,6 +428,12 @@ class sleep extends StatefulWidget {
 
   @override
   State<sleep> createState() => _sleepState();
+
+
+
+
+
+
 }
 
 class _sleepState extends State<sleep> {
