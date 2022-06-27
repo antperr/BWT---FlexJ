@@ -184,8 +184,13 @@ class _hfState extends State<hf> {
               onPressed: () async {
                 // Authorize the app
               },
+<<<<<<< Updated upstream
               child: Text('Yesterday you walked!')),
             ),
+=======
+              child: const Text('Yesterday you walked!')),
+            
+>>>>>>> Stashed changes
             ElevatedButton(
               onPressed: () async {
                 await FitbitConnector.unauthorize(
@@ -205,6 +210,7 @@ class _hfState extends State<hf> {
 
 
 
+<<<<<<< Updated upstream
 FetchedFitData Fetch(userID, ){
    String? userId = await FitbitConnector.authorize(
                     context: context,
@@ -299,6 +305,11 @@ Future<FetchedFitData> fetchin() async{
 
 
 Future Data getdata
+=======
+
+
+
+>>>>>>> Stashed changes
 
 
 
