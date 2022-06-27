@@ -52,7 +52,7 @@ class User {
   tableName: 'Data',
   foreignKeys: [
     ForeignKey(
-      childColumns: ['id2'],
+      childColumns: ['index'],
       parentColumns: ['id'],
       entity: User,
     )
@@ -60,8 +60,6 @@ class User {
 )
 class Data {
   @PrimaryKey()
-  final int? id;
-
   final DateTime giorno;
 
   final int? steps; // numero di passi
@@ -80,11 +78,11 @@ class Data {
 
   final int? bmi; //BMI user
 
-  @ColumnInfo(name: 'id')
-  final int id2;
+  @ColumnInfo(name: 'index')
+  final int index;
 
   //Default constructor
-  Data(this.id, this.giorno, this.steps, this.bpm, this.altezza, this.bmi,
-      this.cal, this.obiettivo, this.peso, this.sleep, this.id2);
+  Data(this.index, this.giorno, this.steps, this.bpm, this.altezza, this.bmi,
+      this.cal, this.obiettivo, this.peso, this.sleep);
 } //table 2
 

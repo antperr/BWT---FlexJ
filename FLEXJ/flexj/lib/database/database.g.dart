@@ -86,7 +86,7 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `User` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `email` TEXT NOT NULL, `pw` TEXT NOT NULL)');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Data` (`id` INTEGER, `giorno` INTEGER NOT NULL, `steps` INTEGER, `bpm` INTEGER, `sleep` INTEGER, `cal` INTEGER, `obiettivo` INTEGER NOT NULL, `peso` INTEGER, `altezza` INTEGER, `bmi` INTEGER, `id` INTEGER NOT NULL, FOREIGN KEY (`id2`) REFERENCES `User` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `Data` (`giorno` INTEGER NOT NULL, `steps` INTEGER, `bpm` INTEGER, `sleep` INTEGER, `cal` INTEGER, `obiettivo` INTEGER NOT NULL, `peso` INTEGER, `altezza` INTEGER, `bmi` INTEGER, `index` INTEGER NOT NULL, FOREIGN KEY (`index`) REFERENCES `User` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION, PRIMARY KEY (`giorno`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -112,7 +112,6 @@ class _$DataDao extends DataDao {
             database,
             'Data',
             (Data item) => <String, Object?>{
-                  'id': item.id,
                   'giorno': _dateTimeConverter.encode(item.giorno),
                   'steps': item.steps,
                   'bpm': item.bpm,
@@ -122,14 +121,13 @@ class _$DataDao extends DataDao {
                   'peso': item.peso,
                   'altezza': item.altezza,
                   'bmi': item.bmi,
-                  'id': item.id2
+                  'index': item.index
                 }),
         _dataUpdateAdapter = UpdateAdapter(
             database,
             'Data',
-            ['id'],
+            ['giorno'],
             (Data item) => <String, Object?>{
-                  'id': item.id,
                   'giorno': _dateTimeConverter.encode(item.giorno),
                   'steps': item.steps,
                   'bpm': item.bpm,
@@ -139,14 +137,13 @@ class _$DataDao extends DataDao {
                   'peso': item.peso,
                   'altezza': item.altezza,
                   'bmi': item.bmi,
-                  'id': item.id2
+                  'index': item.index
                 }),
         _dataDeletionAdapter = DeletionAdapter(
             database,
             'Data',
-            ['id'],
+            ['giorno'],
             (Data item) => <String, Object?>{
-                  'id': item.id,
                   'giorno': _dateTimeConverter.encode(item.giorno),
                   'steps': item.steps,
                   'bpm': item.bpm,
@@ -156,7 +153,7 @@ class _$DataDao extends DataDao {
                   'peso': item.peso,
                   'altezza': item.altezza,
                   'bmi': item.bmi,
-                  'id': item.id2
+                  'index': item.index
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -172,12 +169,12 @@ class _$DataDao extends DataDao {
   final DeletionAdapter<Data> _dataDeletionAdapter;
 
   @override
-  Future<void> findMaxCal() async {
+  Future<Object?> findMaxCal() async {
     await _queryAdapter.queryNoReturn('SELECT MAX(cal) FROM data');
   }
 
   @override
-  Future<void> findMaxSteps() async {
+  Future<Object?> findMaxSteps() async {
     await _queryAdapter.queryNoReturn('SELECT MAX(steps) FROM data');
   }
 
