@@ -1,3 +1,5 @@
+import 'package:fitbitter/fitbitter.dart';
+import 'package:flexj/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
@@ -27,8 +29,8 @@ class _stepsState extends State<steps> {
                 begin: Alignment.centerRight,
                 end: Alignment.centerLeft,
                 colors: [
-              Colors.purple,
-              Colors.red,
+              Color.fromARGB(255, 211, 81, 234),
+              Color.fromARGB(255, 83, 36, 91),
             ])),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -38,7 +40,7 @@ class _stepsState extends State<steps> {
                 totalSteps: obiettivoPassi,
                 currentStep: passiDay,
                 stepSize: 10,
-                selectedColor: Colors.red,
+                selectedColor: Colors.white,
                 unselectedColor: Colors.black,
                 padding: 0,
                 width: 250,
@@ -64,7 +66,38 @@ class _stepsState extends State<steps> {
                     children: [Icon(Icons.directions_walk), Text("$counter m")],
                   )
                 ],
-              )
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.black),
+                ),
+                onPressed: () async {
+                  //Instantiate a proper data manager
+                  FitbitActivityTimeseriesDataManager
+                      fitbitActivityTimeseriesDataManager =
+                      FitbitActivityTimeseriesDataManager(
+                    clientID: Strings.fitbitClientID,
+                    clientSecret: Strings.fitbitClientSecret,
+                    type: 'steps',
+                  );
+
+                  //Fetch data
+                  final stepsDatatoday =
+                      await fitbitActivityTimeseriesDataManager
+                          .fetch(FitbitActivityTimeseriesAPIURL.dayWithResource(
+                    date: DateTime.now().subtract(Duration(days: 0)),
+                    userID: Strings.userId,
+                    resource: fitbitActivityTimeseriesDataManager.type,
+                  )) as List<FitbitActivityTimeseriesData>;
+
+                  // Use them as you want
+                  final snackBar = SnackBar(
+                      content: Text(
+                          'Yesterday you walked ${stepsDatatoday[0].value} steps!'));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
+                child: Text('Fetch the data'),
+              ),
             ]));
   }
 }
