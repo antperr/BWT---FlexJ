@@ -10,13 +10,17 @@ class FetchedFitData{
   double? goal;
   bool? genere;
 
-  FetchedFitData();
+  FetchedFitData({this.altezza, this.genere, this.goal, this.passi, this.peso});
 
   FetchedFitData.withstep({this.passi});
   FetchedFitData.withWeight({this.peso});
   FetchedFitData.withHeight({this.altezza});
   FetchedFitData.withGoal({this.goal});
   FetchedFitData.withGender({this.genere});
+
+  void getSteps(){
+    passi= fetchSteps() as double?;
+  }
 
 }
 
