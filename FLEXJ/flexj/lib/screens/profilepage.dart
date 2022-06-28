@@ -1,7 +1,9 @@
 import 'package:flexj/screens/home.dart';
+import 'package:flexj/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:selection_wave_slider/selection_wave_slider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -133,7 +135,7 @@ class _ProfilePagefulWidgetState extends State<ProfilePageWidget> {
               child: Text('Log out'),
               onPressed: () {
                 //This allows to go back to the HomePage
-                Navigator.pop(context);
+                _toLoginPage(context);
               },
             ),
           ],
@@ -190,4 +192,15 @@ class altezzaState extends State<altezza> {
       ],
     );
   }
+}
+
+void _toLoginPage(BuildContext context) async {
+  //Unset the 'username' filed in SharedPreference
+  final sp = await SharedPreferences.getInstance();
+  sp.remove('username');
+
+  //Pop the drawer first
+  Navigator.pop(context);
+  //Then pop the HomePage
+  Navigator.of(context).pushReplacementNamed(LoginPage.route);
 }
