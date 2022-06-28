@@ -44,7 +44,7 @@ class StepsPage extends StatelessWidget {
 
                 return IconButton( onPressed: (){ 
 
-                    data.passi=fetchSteps();
+                    data.getSteps();
                    },
 
                    icon: Icon(MdiIcons.chiliHot),
