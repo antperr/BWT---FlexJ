@@ -1,15 +1,4 @@
 
-FitbitActivityTimeseriesDataManager
-                    fitbitActivityTimeseriesDataManager =
-                    FitbitActivityTimeseriesDataManager(
-                  clientID: Strings.fitbitClientID,
-                  clientSecret: Strings.fitbitClientSecret,
-                  type: 'steps',
-                );
-
-
-
-
 class FetchedFitData{
 
   double? passi;
@@ -19,10 +8,6 @@ class FetchedFitData{
   FetchedFitData();
 
   FetchedFitData.withstep({this.passi});
-<<<<<<< Updated upstream
-  FetchedFitData.withhr({this.bpm});
-  FetchedFitData.withtimehr({this.hr});
-=======
   FetchedFitData.withWeight({this.peso});
   FetchedFitData.withHeight({this.altezza});
   FetchedFitData.withGoal({this.goal});
@@ -67,7 +52,6 @@ class FetchedFitData{
     
 
 
->>>>>>> Stashed changes
 
 }
 
