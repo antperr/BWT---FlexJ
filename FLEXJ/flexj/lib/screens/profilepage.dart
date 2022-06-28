@@ -202,5 +202,5 @@ void _toLoginPage(BuildContext context) async {
   //Pop the drawer first
   Navigator.pop(context);
   //Then pop the HomePage
-  Navigator.of(context).pushReplacementNamed(LoginPage.route);
+  Navigator.of(context).pushReplacementNamed('/');
 }

@@ -23,16 +23,9 @@ class _stepsState extends State<steps> {
       passiPercent = 100;
     }
 
-    return Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.centerRight,
-                end: Alignment.centerLeft,
-                colors: [
-              Color.fromARGB(255, 211, 81, 234),
-              Color.fromARGB(255, 83, 36, 91),
-            ])),
-        child: Column(
+    return Scaffold(
+        backgroundColor: Colors.purple[200],
+        body: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -58,12 +51,18 @@ class _stepsState extends State<steps> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.local_fire_department),
-                      Text("Calories= $cal kcal")
+                      Text(
+                        "Calories= $cal kcal",
+                        style: TextStyle(fontSize: 15),
+                      )
                     ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Icon(Icons.directions_walk), Text("$counter m")],
+                    children: [
+                      Icon(Icons.directions_walk),
+                      Text("$counter m", style: TextStyle(fontSize: 15))
+                    ],
                   )
                 ],
               ),

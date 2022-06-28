@@ -1,75 +1,96 @@
 import 'package:flexj/database/entities/table.dart';
 import 'package:flexj/screens/home.dart';
 import 'package:flexj/screens/homepage.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_login/flutter_login.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
-  static const route = '/';
-  static const routename = 'LoginPage';
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  @override
-  void initState() {
-    super.initState();
-    //Check if the user is already logged in before rendering the login page
-    _checkLogin();
-  }
-
-  void _checkLogin() async {
-    //Get the SharedPreference instance and check if the value of the 'username' filed is set or not
-    final sp = await SharedPreferences.getInstance();
-    if (sp.getString('username') != null) {
-      //If 'username is set, push the HomePage
-      _toHomePage(context);
-    } //if
-  } //_checkLogin
-
-  Future<String>? _loginUser(LoginData data) async {
-    if (data.name == 'bwt.flej@gmail.com' && data.password == 'antomar00') {
-      final sp = await SharedPreferences.getInstance();
-      sp.setString('username', data.name);
-
-      return '';
-    } else {
-      return 'Wrong credentials';
-    }
-  }
-
-  Future _signUpUser(SignupData data) async {
-    return const SimpleRegisterScreen();
-  }
-
-  // _signUpUser
-  Future<String> _recoverPassword(String email) async {
-    return 'Recover password functionality needs to be implemented';
-  }
-
-  // _recoverPassword
+class Loginpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FlutterLogin(
-      title: 'login_flow',
-      onLogin: _loginUser,
-      onRecoverPassword: _recoverPassword,
-      onSubmitAnimationCompleted: () async {
-        _toHomePage(context);
-      },
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: ListView(
+          children: [
+            SizedBox(height: screenHeight * .12),
+            const Text(
+              "Flexj,",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: screenHeight * .12,
+            ),
+            Text(
+              "To make your feel awesome, possibly",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black.withOpacity(.6),
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.05),
+            InputField(labelText: "Email"),
+            SizedBox(height: screenHeight * .025),
+            InputField(
+              labelText: "Password",
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                child: const Text(
+                  "Forgot Password?",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: screenHeight * .075,
+            ),
+            FormButton(
+              text: "Log In",
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => newhome()),
+              ),
+            ),
+            SizedBox(
+              height: screenHeight * .15,
+            ),
+            TextButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const SimpleRegisterScreen(),
+                ),
+              ),
+              child: RichText(
+                text: const TextSpan(
+                  text: "I'm a new user, ",
+                  style: TextStyle(color: Colors.black),
+                  children: [
+                    TextSpan(
+                      text: "Sign Up",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
-  } // build
-
-  void _toHomePage(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed(HomePage.route);
-  } //_toHomePage
-
+  }
 }
 
 class SimpleRegisterScreen extends StatefulWidget {
