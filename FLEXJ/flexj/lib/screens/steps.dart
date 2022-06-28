@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:fitbitter/fitbitter.dart';
 import 'package:flexj/utils/fitData.dart';
 import 'package:flexj/utils/strings.dart';
@@ -33,18 +31,6 @@ class StepsPage extends StatelessWidget {
       passiPercent = 100;
     }
 
-<<<<<<< Updated upstream
-    return Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.centerRight,
-                end: Alignment.centerLeft,
-                colors: [
-              Colors.purple,
-              Colors.red,
-            ])),
-        child: Column(
-=======
     return Scaffold(
        
        appBar: AppBar(
@@ -58,7 +44,7 @@ class StepsPage extends StatelessWidget {
 
                 return IconButton( onPressed: (){ 
 
-                    data.fetchSteps();
+                    data.passi=fetchSteps();
                    },
 
                    icon: Icon(MdiIcons.chiliHot),
@@ -71,7 +57,6 @@ class StepsPage extends StatelessWidget {
 
         body: Center(
           child: Column(
->>>>>>> Stashed changes
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -118,78 +103,6 @@ class StepsPage extends StatelessWidget {
                     children: [Icon(Icons.directions_walk), Text("$counter m")],
                   )
                 ],
-<<<<<<< Updated upstream
-              )
-            ]));
-  }
-}
-
-
-
-FitbitActivityTimeseriesDataManager
-                    fitbitActivityTimeseriesDataManager =
-                    FitbitActivityTimeseriesDataManager(
-                  clientID: Strings.fitbitClientID,
-                  clientSecret: Strings.fitbitClientSecret,
-                  type: 'steps',
-                );
-
-
-
-
-class FetchedFitData{
-
-  double? passi;
-  double? bpm;
-  List<FitbitActivityTimeseriesData>? hr;
-  
-  FetchedFitData();
-
-  FetchedFitData.withstep({this.passi});
-  FetchedFitData.withhr({this.bpm});
-  FetchedFitData.withtimehr({this.hr});
-
-}
-
-
-Future<FetchedFitData> fetchin() async{
-
-  FetchedFitData fitData;
-
-  
-  String? userId = await FitbitConnector.authorize(
-                    context: ,
-                    clientID: Strings.fitbitClientID,
-                    clientSecret: Strings.fitbitClientSecret,
-                    redirectUri: Strings.fitbitRedirectUri,
-                    callbackUrlScheme: Strings.fitbitCallbackScheme);
-                    
-                //Instantiate a proper data manager
-  FitbitActivityTimeseriesDataManager fitbitActivityTimeseriesDataManager = 
-                    FitbitActivityTimeseriesDataManager(
-                                clientID: Strings.fitbitClientID,
-                                clientSecret: Strings.fitbitClientSecret,
-                                type: 'steps',
-                    );
-
-                //Fetch data
-                final hrData = await fitbitActivityTimeseriesDataManager.fetch(
-                                          FitbitActivityTimeseriesAPIURL.dayWithResource(
-                                            date: DateTime.now().subtract(Duration(days: 1)),
-                                            userID: userId,
-                                            resource: fitbitActivityTimeseriesDataManager.type,
-                                          )
-                                        ) as List<FitbitActivityTimeseriesData>;
-
-
-    fitData=FetchedFitData.withstep(passi: 10);
-    fitData=FetchedFitData.withhr(bpm: 100);
-    fitData=FetchedFitData.withtimehr(hr: hrData);
-
-
-  return fitData;
-}
-=======
               ),
              
             ]))); 
@@ -198,4 +111,3 @@ Future<FetchedFitData> fetchin() async{
 */
 
 }
->>>>>>> Stashed changes

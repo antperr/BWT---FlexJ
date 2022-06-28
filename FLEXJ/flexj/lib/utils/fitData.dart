@@ -1,10 +1,15 @@
 
+import 'package:fitbitter/fitbitter.dart';
+import 'package:flexj/utils/strings.dart';
+
 class FetchedFitData{
 
   double? passi;
-  double? bpm;
-  List<FitbitActivityTimeseriesData>? hr;
-  
+  double? peso;
+  double? altezza;
+  double? goal;
+  bool? genere;
+
   FetchedFitData();
 
   FetchedFitData.withstep({this.passi});
@@ -13,7 +18,13 @@ class FetchedFitData{
   FetchedFitData.withGoal({this.goal});
   FetchedFitData.withGender({this.genere});
 
-    Future<double?> fetchSteps() async{
+}
+
+
+
+
+
+Future<double?> fetchSteps() async{
 
       double? steps=0;
 
@@ -48,48 +59,3 @@ class FetchedFitData{
 
       return steps;
     }
-
-    
-
-
-
-}
-
-
-Future<FetchedFitData> fetchin() async{
-
-  FetchedFitData fitData;
-
-  
-  String? userId = await FitbitConnector.authorize(
-                    context: ,
-                    clientID: Strings.fitbitClientID,
-                    clientSecret: Strings.fitbitClientSecret,
-                    redirectUri: Strings.fitbitRedirectUri,
-                    callbackUrlScheme: Strings.fitbitCallbackScheme);
-                    
-                //Instantiate a proper data manager
-  FitbitActivityTimeseriesDataManager fitbitActivityTimeseriesDataManager = 
-                    FitbitActivityTimeseriesDataManager(
-                                clientID: Strings.fitbitClientID,
-                                clientSecret: Strings.fitbitClientSecret,
-                                type: 'steps',
-                    );
-
-                //Fetch data
-                final hrData = await fitbitActivityTimeseriesDataManager.fetch(
-                                          FitbitActivityTimeseriesAPIURL.dayWithResource(
-                                            date: DateTime.now().subtract(Duration(days: 1)),
-                                            userID: userId,
-                                            resource: fitbitActivityTimeseriesDataManager.type,
-                                          )
-                                        ) as List<FitbitActivityTimeseriesData>;
-
-
-    fitData=FetchedFitData.withstep(passi: 10);
-    fitData=FetchedFitData.withhr(bpm: 100);
-    fitData=FetchedFitData.withtimehr(hr: hrData);
-
-
-  return fitData;
-}

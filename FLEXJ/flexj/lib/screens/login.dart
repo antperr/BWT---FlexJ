@@ -1,13 +1,17 @@
 import 'package:flexj/screens/home.dart';
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 
-class Loginpage extends StatelessWidget {
+class LoginPage extends StatelessWidget {
+
+  LoginPage({Key? key}) : super(key: key);
+
+  static const route = '/cart';
+  static const routeDisplayName = 'LoginPage';
+
   @override
   Widget build(BuildContext context) {
+        print('${LoginPage.routeDisplayName} built');
+
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Padding(
@@ -57,7 +61,7 @@ class Loginpage extends StatelessWidget {
               text: "Log In",
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => newhome()),
+                MaterialPageRoute(builder: (context) => HomePage()),
               ),
             ),
             SizedBox(
