@@ -1,30 +1,39 @@
 import 'dart:js';
 
 import 'package:fitbitter/fitbitter.dart';
+import 'package:flexj/utils/fitData.dart';
 import 'package:flexj/utils/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-class steps extends StatefulWidget {
-  const steps({Key? key}) : super(key: key);
+class StepsPage extends StatelessWidget {
+  const StepsPage({Key? key}) : super(key: key);
 
-  @override
-  State<steps> createState() => _stepsState();
-}
+  static const route = '/';
+  static const routename = 'StepPage';
 
-class _stepsState extends State<steps> {
+
   @override
   Widget build(BuildContext context) {
-    int obiettivoPassi = 8000;
-    int passiDay = 5000;
-    double counter = passiDay * 0.60;
+    
+    
+    
+    
+    
+    
+    double obiettivoPassi = 8000;
+    double stepsnow = 0;
+    double counter = stepsnow * 0.60;
     double peso = 80;
     double cal = 0.5 * peso * counter / 1000;
-    double passiPercent = passiDay / obiettivoPassi * 100;
+    double passiPercent = stepsnow / obiettivoPassi * 100;
     if (passiPercent > 100) {
       passiPercent = 100;
     }
 
+<<<<<<< Updated upstream
     return Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -35,10 +44,51 @@ class _stepsState extends State<steps> {
               Colors.red,
             ])),
         child: Column(
+=======
+    return Scaffold(
+       
+       appBar: AppBar(
+
+          title: Text(StepsPage.routename),
+
+          actions: [
+            Consumer<FetchedFitData>(
+              
+              builder: (context, data, child) {
+
+                return IconButton( onPressed: (){ 
+
+                    data.fetchSteps();
+                   },
+
+                   icon: Icon(MdiIcons.chiliHot),
+                );
+                
+              },)
+
+          ],
+       ),
+
+        body: Center(
+          child: Column(
+>>>>>>> Stashed changes
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircularStepProgressIndicator(
+
+              Consumer<FetchedFitData>(
+                builder: (context, passiora, child) => Text('dude u made ${passiora.passi}')),//stepsnow=passiora.passi,)
+
+
+
+
+            ],
+          )
+        )
+    );
+  }
+
+             /*  CircularStepProgressIndicator(
                 totalSteps: obiettivoPassi,
                 currentStep: passiDay,
                 stepSize: 10,
@@ -68,6 +118,7 @@ class _stepsState extends State<steps> {
                     children: [Icon(Icons.directions_walk), Text("$counter m")],
                   )
                 ],
+<<<<<<< Updated upstream
               )
             ]));
   }
@@ -138,3 +189,13 @@ Future<FetchedFitData> fetchin() async{
 
   return fitData;
 }
+=======
+              ),
+             
+            ]))); 
+  }
+}
+*/
+
+}
+>>>>>>> Stashed changes

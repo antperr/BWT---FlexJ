@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import 'package:fitbitter/fitbitter.dart';
 import 'package:flexj/screens/profilepage.dart';
 import 'package:flexj/utils/strings.dart';
@@ -330,6 +331,18 @@ Future Data getdata
 
 class dashboard extends StatefulWidget {
   const dashboard({Key? key}) : super(key: key);
+=======
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class HomePage extends StatelessWidget {
+  HomePage({Key? key}) : super(key: key);
+
+  static const route = '/';
+  static const routename = 'HomePage';
+
+>>>>>>> Stashed changes
 
   @override
   State<dashboard> createState() => _dashboardState();
@@ -338,6 +351,7 @@ class dashboard extends StatefulWidget {
 class _dashboardState extends State<dashboard> {
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
     int peso = 85;
     double altezza = 185;
     double bodymass = peso / ((altezza / 100) * (altezza / 100));
@@ -460,5 +474,20 @@ class _sleepState extends State<sleep> {
             Colors.indigo,
           ])),
     );
+=======
+    return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            'Home',
+          ),
+          backgroundColor: Colors.black,
+        ),
+        body: Column(
+          children: [
+            ElevatedButton(onPressed: () {}, child: Text("to dashboard"))
+          ],
+        ));
+>>>>>>> Stashed changes
   }
 }

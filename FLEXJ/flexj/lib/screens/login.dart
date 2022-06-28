@@ -1,4 +1,8 @@
 import 'package:flexj/screens/home.dart';
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 
 class Loginpage extends StatelessWidget {

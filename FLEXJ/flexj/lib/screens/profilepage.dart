@@ -126,7 +126,7 @@ class _ProfilePagefulWidgetState extends State<ProfilePageWidget> {
               onPressed: () {
                 //This allows to go back to the HomePage
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => newhome()));
+                    MaterialPageRoute(builder: (context) => HomePage()));
               },
             ),
             ElevatedButton(
