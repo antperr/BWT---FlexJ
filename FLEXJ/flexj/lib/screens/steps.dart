@@ -10,7 +10,7 @@ class StepsPage extends StatelessWidget {
   const StepsPage({Key? key}) : super(key: key);
 
   static const route = '/';
-  static const routename = 'StepPage';
+  static const routename = 'StepsPage';
 
 
   @override
