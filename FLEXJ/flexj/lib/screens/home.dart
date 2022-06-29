@@ -48,7 +48,7 @@ class Home extends StatelessWidget {
     //Pop the drawer first
     Navigator.pop(context);
     //Then pop the HomePage
-    Navigator.of(context).pushReplacementNamed(LoginPage.route);
+    Navigator.of(context).pushReplacementNamed(Loginpage.routename);
   } //_toCalendarPage
 
 } //HomePage

@@ -1,4 +1,3 @@
-import 'package:fitbitter/fitbitter.dart';
 import 'package:flexj/database/database.dart';
 import 'package:flexj/repository/databaseRepository.dart';
 import 'package:flexj/screens/heart.dart';
@@ -10,7 +9,6 @@ import 'package:flexj/screens/sleep.dart';
 import 'package:flexj/screens/steps.dart';
 import 'package:flexj/utils/fitData.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
 // We modified the main
@@ -42,10 +40,10 @@ class MyApp extends StatelessWidget {
       create: (context) => FetchedFitData(),
       child: MaterialApp(
         //This specifies the app entrypoint
-        initialRoute: '/',
+        initialRoute: HomePage.route,
         //This maps names to the set of routes within the app
         routes: {
-          '/': (context) => LoginPage(),
+          'login': (context) => Loginpage(),
           HomePage.route: (context) => Home(),
           '/profile/': (context) => ProfilePage(),
           '/steps/': (context) => steps(),
