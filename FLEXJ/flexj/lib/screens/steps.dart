@@ -9,18 +9,11 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 class StepsPage extends StatelessWidget {
   const StepsPage({Key? key}) : super(key: key);
 
-  static const route = '/';
+  static const route = 'steps';
   static const routename = 'StepsPage';
-
 
   @override
   Widget build(BuildContext context) {
-    
-    
-    
-    
-    
-    
     double obiettivoPassi = 8000;
     double stepsnow = 0;
     double counter = stepsnow * 0.60;
@@ -32,48 +25,34 @@ class StepsPage extends StatelessWidget {
     }
 
     return Scaffold(
-       
-       appBar: AppBar(
-
+        appBar: AppBar(
           title: Text(StepsPage.routename),
-
           actions: [
             Consumer<FetchedFitData>(
-              
               builder: (context, data, child) {
-
-                return IconButton( onPressed: (){ 
-
+                return IconButton(
+                  onPressed: () {
                     data.getSteps();
-                   },
-
-                   icon: Icon(MdiIcons.chiliHot),
+                  },
+                  icon: Icon(MdiIcons.chiliHot),
                 );
-                
-              },)
-
+              },
+            )
           ],
-       ),
-
+        ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-
-              Consumer<FetchedFitData>(
-                builder: (context, passiora, child) => Text('dude u made ${passiora.passi}')),//stepsnow=passiora.passi,)
-
-
-
-
-            ],
-          )
-        )
-    );
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Consumer<FetchedFitData>(
+                builder: (context, passiora, child) => Text(
+                    'dude u made ${passiora.passi}')), //stepsnow=passiora.passi,)
+          ],
+        )));
   }
 
-             /*  CircularStepProgressIndicator(
+  /*  CircularStepProgressIndicator(
                 totalSteps: obiettivoPassi,
                 currentStep: passiDay,
                 stepSize: 10,

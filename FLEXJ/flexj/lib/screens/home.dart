@@ -19,14 +19,50 @@ class HomePage extends StatelessWidget {
           title: const Text(HomePage.routeDisplayName),
           backgroundColor: Colors.black,
         ),
-        body: Column(
-          children: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/');
-                },
-                child: Text("to dashboard"))
-          ],
+        body: Center(
+          child: Column(
+            children: [
+              Text(
+                "Welcome to",
+                style: TextStyle(fontSize: 30, color: Colors.black),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "FLEXJ",
+                style: TextStyle(fontSize: 50, color: Colors.red),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.black)),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'steps');
+                      },
+                      child: Text("To Steps")),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.black)),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/profile/');
+                      },
+                      child: Text("Go to profile")),
+                ],
+              ),
+              ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.red)),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  child: Text("LogOut"))
+            ],
+          ),
         ));
   }
 }
