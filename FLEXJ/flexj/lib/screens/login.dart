@@ -5,7 +5,7 @@ class LoginPage extends StatelessWidget {
 
   LoginPage({Key? key}) : super(key: key);
 
-  static const route = '/cart';
+  static const route = '/login';
   static const routeDisplayName = 'LoginPage';
 
   @override
