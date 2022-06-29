@@ -40,6 +40,8 @@ dependencies:
   numberpicker: ^2.1.1
   selection_wave_slider: ^0.0.1
   floor: ^1.2.0
+  flutter_login: 
+  
   
 
 

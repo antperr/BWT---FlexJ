@@ -127,8 +127,8 @@ class _ProfilePagefulWidgetState extends State<ProfilePageWidget> {
               child: Text('Home'),
               onPressed: () {
                 //This allows to go back to the HomePage
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => newhome()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Home()));
               },
             ),
             ElevatedButton(
@@ -202,5 +202,5 @@ void _toLoginPage(BuildContext context) async {
   //Pop the drawer first
   Navigator.pop(context);
   //Then pop the HomePage
-  Navigator.of(context).pushReplacementNamed('/');
+  Navigator.of(context).pushReplacementNamed(Home.route);
 }
