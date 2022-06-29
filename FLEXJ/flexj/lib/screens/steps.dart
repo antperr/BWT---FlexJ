@@ -9,7 +9,7 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 class StepsPage extends StatelessWidget {
   const StepsPage({Key? key}) : super(key: key);
 
-  static const route = '/';
+  static const route = '/steps';
   static const routename = 'StepsPage';
 
 

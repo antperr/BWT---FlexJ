@@ -3,31 +3,38 @@ import 'package:fitbitter/fitbitter.dart';
 import 'package:flexj/utils/strings.dart';
 import 'package:flutter/cupertino.dart';
 
-class FetchedFitData extends ChangeNotifier{
+class FetchedFitData{
 
   double? passi;
   double? peso;
   double? altezza;
   double? goal;
-  bool? genere;
 
-  FetchedFitData({this.altezza, this.genere, this.goal, this.passi, this.peso});
+  FetchedFitData({required this.altezza, required this.goal, required this.passi, required this.peso});
 
   FetchedFitData.withstep({this.passi});
   FetchedFitData.withWeight({this.peso});
   FetchedFitData.withHeight({this.altezza});
   FetchedFitData.withGoal({this.goal});
-  FetchedFitData.withGender({this.genere});
-
-  void getSteps(){
-    passi= fetchSteps() as double?;
-  }
 
 }
 
+class FFDTizio extends ChangeNotifier{
 
+  FetchedFitData? Tizio;
 
+  void getSteps(FetchedFitData toAdd){
+    data.add(toAdd);
+    notifyListeners();
+  }
 
+}
+/* 
+void getSteps(){
+    passi= fetchSteps() as double?;
+    notifyListeners();
+  }
+ */
 
 Future<double?> fetchSteps() async{
 
@@ -50,9 +57,9 @@ Future<double?> fetchSteps() async{
             );
 
                     //Fetch data
-      final stepsData = await fitbitActivityTimeseriesDataManager.fetch(
+      var stepsData = await fitbitActivityTimeseriesDataManager.fetch(
                 FitbitActivityTimeseriesAPIURL.dayWithResource(
-                    date: DateTime.now().subtract(Duration(days: 1)),
+                    date: DateTime.now().subtract(Duration(days: 0)),
                     userID: userId,
                     resource: fitbitActivityTimeseriesDataManager.type,
                     )
@@ -60,7 +67,7 @@ Future<double?> fetchSteps() async{
 
       
 
-      steps=stepsData.last.value;
+      steps=stepsData.last.value?.toDouble();
 
       return steps;
     }

@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
   
         body: Column(
           children: [
-            ElevatedButton(onPressed: () {}, child: Text("to dashboard"))
+            ElevatedButton(onPressed: () {Navigator.pushNamed(context, '/steps');}, child: Text("to dashboard"))
           ],
         ));
   }
