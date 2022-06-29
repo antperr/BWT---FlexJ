@@ -1,8 +1,9 @@
 
 import 'package:fitbitter/fitbitter.dart';
 import 'package:flexj/utils/strings.dart';
+import 'package:flutter/cupertino.dart';
 
-class FetchedFitData{
+class FetchedFitData extends ChangeNotifier{
 
   double? passi;
   double? peso;
