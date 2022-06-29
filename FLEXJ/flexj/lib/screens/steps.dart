@@ -17,10 +17,6 @@ class StepsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     
     
-    
-    
-    
-    
     double obiettivoPassi = 8000;
     double stepsnow = 0;
     double counter = stepsnow * 0.60;

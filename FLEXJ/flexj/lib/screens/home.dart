@@ -1,33 +1,68 @@
 import 'package:flexj/utils/fitData.dart';
 import 'package:flutter/material.dart';
 
-
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
   static const route = '/home';
   static const routeDisplayName = 'HomePage';
 
-  final FetchedFitData userData = FetchedFitData();
-
+  final FetchedFitData userData = FetchedFitData(goal:0, altezza:0, passi:0, peso:0);
 
   @override
   Widget build(BuildContext context) {
-        print('${HomePage.routeDisplayName} built');
+    print('${HomePage.routeDisplayName} built');
 
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           title: const Text(HomePage.routeDisplayName),
           backgroundColor: Colors.black,
-
         ),
-
-  
-        body: Column(
-          children: [
-            ElevatedButton(onPressed: () {Navigator.pushNamed(context, '/steps');}, child: Text("to dashboard"))
-          ],
+        body: Center(
+          child: Column(
+            children: [
+              const Text(
+                "Welcome to",
+                style: TextStyle(fontSize: 30, color: Colors.black),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                "FLEXJ",
+                style: TextStyle(fontSize: 50, color: Colors.red),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.black)),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'steps');
+                      },
+                      child: Text("To Steps")),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.black)),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/profile/');
+                      },
+                      child: Text("Go to profile")),
+                ],
+              ),
+              ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.red)),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  child: Text("LogOut"))
+            ],
+          ),
         ));
   }
 }
