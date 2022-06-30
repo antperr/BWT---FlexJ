@@ -1,4 +1,5 @@
-import 'package:flexj/screens/home.dart';
+
+  import 'package:flexj/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   }//_checkLogin
 
   Future<String> _loginUser(LoginData data) async {
-    if(data.name == 'bug@cacca.it' && data.password == '123456789'){
+    if(data.name == 'si@prova.it' && data.password == 'ciriesco'){
 
       final sp = await SharedPreferences.getInstance();
       sp.setString('username', data.name);

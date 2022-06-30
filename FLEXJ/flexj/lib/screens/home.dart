@@ -1,7 +1,6 @@
 import 'package:flexj/screens/login.dart';
 import 'package:flexj/screens/profilepage.dart';
 import 'package:flexj/screens/steps.dart';
-import 'package:flexj/utils/fitData.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

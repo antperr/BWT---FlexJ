@@ -9,15 +9,11 @@ String UserId = '7ML2XV';
 
 
 class StepTizio extends ChangeNotifier{
-
   int steps = 0;
-
   Future<int> getSteps() async{
-
     int? st= await fetchStep(UserId);
     steps=st as int;
     notifyListeners();
-
     return steps;
   }
 }
