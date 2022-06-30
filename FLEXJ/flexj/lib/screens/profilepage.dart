@@ -2,7 +2,6 @@ import 'package:flexj/screens/home.dart';
 import 'package:flexj/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
-import 'package:selection_wave_slider/selection_wave_slider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -39,30 +38,6 @@ class _ProfilePagefulWidgetState extends State<ProfilePageWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text("Seleziona il tuo livello"),
-        WaveSliderWithDragPoint(
-          dragButton: Container(
-            color: Colors.blue,
-          ),
-          sliderHeight: 80,
-          sliderPointColor: Colors.blue,
-          sliderPointBorderColor: Colors.orange,
-          sliderColor: Colors.red,
-          toolTipBackgroundColor: Colors.yellow,
-          toolTipBorderColor: Colors.green,
-          toolTipTextStyle: TextStyle(
-            color: Colors.green,
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
-          onSelected: (value) {
-            print(value);
-          },
-          optionToChoose: [
-            "Principiante",
-            "Intermedio",
-            "Esperto",
-          ],
-        ),
         Container(
           height: 50,
         ),
@@ -123,20 +98,16 @@ class _ProfilePagefulWidgetState extends State<ProfilePageWidget> {
                 Navigator.pop(context);
               },
             ),
+
+
             ElevatedButton(
               child: Text('Home'),
-              onPressed: () {
-                //This allows to go back to the HomePage
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Home()));
-              },
+              onPressed: () => _toHomePage(context),
+
             ),
             ElevatedButton(
               child: Text('Log out'),
-              onPressed: () {
-                //This allows to go back to the HomePage
-                _toLoginPage(context);
-              },
+              onPressed: () => _toLoginPage(context) ,
             ),
           ],
         )
@@ -145,6 +116,25 @@ class _ProfilePagefulWidgetState extends State<ProfilePageWidget> {
   } //build
 
 } //ProfilePage
+
+ void _toHomePage(BuildContext context){
+    //Pop the drawer first 
+    Navigator.pop(context);
+    //Then push the CalendarPage
+    
+    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()), );
+  }
+
+void _toLoginPage(BuildContext context) async{
+    //Unset the 'username' filed in SharedPreference 
+    final sp = await SharedPreferences.getInstance();
+    sp.remove('username');
+
+    //Pop the drawer first 
+    Navigator.pop(context);
+    //Then pop the HomePage
+    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()), );
+  }
 
 class Peso extends StatefulWidget {
   @override
@@ -192,15 +182,4 @@ class altezzaState extends State<altezza> {
       ],
     );
   }
-}
-
-void _toLoginPage(BuildContext context) async {
-  //Unset the 'username' filed in SharedPreference
-  final sp = await SharedPreferences.getInstance();
-  sp.remove('username');
-
-  //Pop the drawer first
-  Navigator.pop(context);
-  //Then pop the HomePage
-  Navigator.of(context).pushReplacementNamed(Home.route);
 }
